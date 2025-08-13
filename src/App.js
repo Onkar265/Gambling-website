@@ -24,7 +24,7 @@ export default function App() {
       players: 3035,
       bg: "from-green-500 to-cyan-500",
       img: "💎",
-      link: "http://localhost:4173/"
+      link: "http://localhost:5173/"
     },
     {
       name: "PLINKO",
