@@ -136,14 +136,18 @@ export default function App() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
             {games.map((g, idx) => (
-              <a href=" http://localhost:4173/"><div
+              <a
                 key={idx}
-                className={`rounded-xl shadow-lg bg-gradient-to-br ${g.bg} p-6 flex flex-col items-center text-center hover:scale-105 transform transition`}
+                href={g.link || "#"} // Use game's link or "#" if none
               >
-                <div className="text-5xl mb-4">{g.img}</div>
-                <h4 className="text-xl font-bold">{g.name}</h4>
-                <p className="text-sm text-gray-200">{g.sub}</p>
-              </div></a>
+                <div
+                  className={`rounded-xl shadow-lg bg-gradient-to-br ${g.bg} p-6 flex flex-col items-center text-center hover:scale-105 transform transition`}
+                >
+                  <div className="text-5xl mb-4">{g.img}</div>
+                  <h4 className="text-xl font-bold">{g.name}</h4>
+                  <p className="text-sm text-gray-200">{g.sub}</p>
+                </div>
+              </a>
             ))}
           </div>
         </section>
