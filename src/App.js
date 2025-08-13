@@ -12,11 +12,11 @@ export default function App() {
 
   const games = [
     {
-      name: "DICE",
+      name: "Roulette",
       sub: "STAKE ORIGINALS",
       players: 2299,
       bg: "from-purple-500 to-indigo-500",
-      img: "🎲",
+      img: "🎰",
     },
     {
       name: "MINES",
@@ -47,6 +47,7 @@ export default function App() {
       players: 1689,
       bg: "from-orange-400 to-red-400",
       img: "🎯",
+      link: ""
     },
   ];
 
