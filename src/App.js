@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Menu, User, HelpCircle, Info } from "lucide-react";
-
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showGames, setShowGames] = useState(false);
@@ -25,6 +24,7 @@ export default function App() {
       players: 3035,
       bg: "from-green-500 to-cyan-500",
       img: "💎",
+      link: "http://localhost:5173/"
     },
     {
       name: "PLINKO",
@@ -39,6 +39,7 @@ export default function App() {
       players: 1146,
       bg: "from-blue-400 to-yellow-400",
       img: "🚀",
+      link: "http://127.0.0.1:8080"
     },
     {
       name: "LIMBO",
@@ -136,16 +137,22 @@ export default function App() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
             {games.map((g, idx) => (
-              <div
+              <a
                 key={idx}
-                className={`rounded-xl shadow-lg bg-gradient-to-br ${g.bg} p-6 flex flex-col items-center text-center hover:scale-105 transform transition`}
+                href={g.link || "#"} // Use game's link or "#" if none
               >
-                <div className="text-5xl mb-4">{g.img}</div>
-                <h4 className="text-xl font-bold">{g.name}</h4>
-                <p className="text-sm text-gray-200">{g.sub}</p>
-              </div>
+                <div
+                  className={`rounded-xl shadow-lg bg-gradient-to-br ${g.bg} p-6 flex flex-col items-center text-center hover:scale-105 transform transition`}
+                >
+                  <div className="text-5xl mb-4">{g.img}</div>
+                  <h4 className="text-xl font-bold">{g.name}</h4>
+                  <p className="text-sm text-gray-200">{g.sub}</p>
+                </div>
+              </a>
             ))}
           </div>
+
+
         </section>
       )}
 
