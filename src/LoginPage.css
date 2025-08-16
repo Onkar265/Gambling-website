@@ -1,0 +1,65 @@
+/* Neon glow animation */
+.neon-glow {
+  animation: neonPulse 2s infinite alternate;
+}
+
+@keyframes neonPulse {
+  from {
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.4),
+                0 0 20px rgba(255, 215, 0, 0.3),
+                0 0 30px rgba(255, 215, 0, 0.2);
+  }
+  to {
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.7),
+                0 0 40px rgba(255, 215, 0, 0.5),
+                0 0 60px rgba(255, 215, 0, 0.3);
+  }
+}
+
+/* Floating poker chips animation */
+.chip {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Poker_chip_2.png/600px-Poker_chip_2.png');
+  background-size: cover;
+  opacity: 0.7;
+}
+
+.chip1 {
+  top: -100px;
+  left: 15%;
+  animation: floatChip 12s linear infinite;
+}
+
+.chip2 {
+  top: -150px;
+  left: 50%;
+  animation: floatChip 15s linear infinite;
+}
+
+.chip3 {
+  top: -200px;
+  left: 80%;
+  animation: floatChip 18s linear infinite;
+}
+
+@keyframes floatChip {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(120vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 640px) {
+  .chip {
+    width: 40px;
+    height: 40px;
+    opacity: 0.5;
+  }
+}
