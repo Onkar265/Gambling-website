@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import { Menu, User, HelpCircle, Info } from "lucide-react";
+import LoginPage from "./LoginPage";
+import MainLayout from "./MainLayout";
+import { Link } from "react-router-dom"; 
+
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showGames, setShowGames] = useState(false);
@@ -62,9 +66,17 @@ export default function App() {
           <Menu />
           <span className="font-bold">Menu</span>
         </button>
-        <h1 className="text-2xl font-extrabold tracking-wider text-yellow-400">
-          🎰 LuckySpin
-        </h1>
+              <div className="flex items-center space-x-4">
+          <Link to="/login">
+            <button className="px-3 py-1 bg-gray-700 hover:bg-gray-600 rounded-md text-sm transition">
+              Login
+            </button>
+          </Link>
+
+          <h1 className="text-2xl font-extrabold tracking-wider text-yellow-400">
+            🎰 LuckySpin
+          </h1>
+        </div>
       </header>
 
       {/* Dropdown Menu */}
