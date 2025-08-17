@@ -1,7 +1,21 @@
 import React from "react";
 import "./LoginPage.css"; // animations for glow & chips
+import { Link } from "react-router-dom";
 
 export default function LoginPage() {
+  // dynamic import handler — dev/demo only
+  const handleDynamicImport = async () => {
+    try {
+      const mod = await import("./LoginPage");
+      // mod.default is the component — we just show a quick confirmation
+      console.log("Dynamically loaded LoginPage module:", mod.default);
+      alert("LoginPage module dynamically imported (check console).");
+    } catch (err) {
+      console.error("Failed to dynamically import LoginPage:", err);
+      alert("Dynamic import failed — see console.");
+    }
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-gray-900 to-black relative overflow-hidden">
       {/* Floating poker chips */}
@@ -16,7 +30,7 @@ export default function LoginPage() {
         {/* Logo / Title */}
         <div className="text-center mb-6">
           <h1 className="text-3xl font-bold text-yellow-300 tracking-wide">
-            🎰 HighRoller
+            🎰 LuckySpin
           </h1>
           <p className="text-gray-400 text-sm mt-1">
             Sign in to place your bets
@@ -43,22 +57,25 @@ export default function LoginPage() {
             />
           </div>
 
-          {/* Submit Button */}
-          <button
-            type="submit"
-            className="w-full py-2 rounded-lg bg-yellow-400 text-black font-semibold tracking-wide hover:bg-yellow-300 transition-all duration-200"
-          >
-            Login
-          </button>
+         <div className="flex gap-3">
+            <button
+                type="submit"
+                className="flex-1 py-2 rounded-lg bg-yellow-400 text-black font-semibold tracking-wide hover:bg-yellow-300 transition-all duration-200"
+            >
+                Login
+            </button>
+
+            <Link
+                to="/signup"
+                className="px-3 py-2 rounded-lg bg-gray-700 text-sm text-gray-100 hover:bg-gray-600 transition flex items-center justify-center"
+            >
+                Sign-Up
+            </Link>
+            </div>
+
         </form>
 
-        {/* Extras */}
-        <div className="text-center mt-5 text-gray-400 text-sm">
-          Don’t have an account?{" "}
-          <a className="text-yellow-300 hover:text-yellow-200 underline" href="#">
-            Sign Up
-          </a>
-        </div>
+       
       </div>
     </div>
   );

@@ -1,8 +1,14 @@
+import { useNavigate } from 'react-router-dom'; 
+import ReactDOM from 'react-dom/client';
 import React, { useState } from "react";
-
+import {Link} from 'react-router-dom';
 export default function App() {
   const [showGames, setShowGames] = useState(false);
-  
+  const navigate=useNavigate();
+  function loginfun()
+  {
+    navigate("/Login");
+  }
   const sidebarOptions = [
     "My Profile",
     "Wager",
@@ -74,7 +80,7 @@ export default function App() {
           </h1>
 
           <div className="space-x-4">
-            <button className="px-4 py-2 bg-purple-600 rounded-full">Login</button>
+            <button className="px-4 py-2 bg-purple-600 rounded-full" onClick={loginfun}>Login</button>
           </div>
         </header>
 
