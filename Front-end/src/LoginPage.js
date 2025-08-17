@@ -1,5 +1,6 @@
 import React from "react";
 import "./LoginPage.css"; // animations for glow & chips
+import { Link } from "react-router-dom";
 
 export default function LoginPage() {
   // dynamic import handler — dev/demo only
@@ -56,25 +57,22 @@ export default function LoginPage() {
             />
           </div>
 
-          {/* Submit Button */}
-          <div className="flex gap-3">
+         <div className="flex gap-3">
             <button
-              type="submit"
-              className="flex-1 py-2 rounded-lg bg-yellow-400 text-black font-semibold tracking-wide hover:bg-yellow-300 transition-all duration-200"
+                type="submit"
+                className="flex-1 py-2 rounded-lg bg-yellow-400 text-black font-semibold tracking-wide hover:bg-yellow-300 transition-all duration-200"
             >
-              Login
+                Login
             </button>
 
-            {/* Small dev/demo button to dynamically import the module */}
-            <button
-              type="button"
-              onClick={handleDynamicImport}
-              className="px-3 py-2 rounded-lg bg-gray-700 text-sm text-gray-100 hover:bg-gray-600 transition"
-              title="Dynamically import the LoginPage module (dev only)"
+            <Link
+                to="/signup"
+                className="px-3 py-2 rounded-lg bg-gray-700 text-sm text-gray-100 hover:bg-gray-600 transition flex items-center justify-center"
             >
-              Sign-Up
-            </button>
-          </div>
+                Sign-Up
+            </Link>
+            </div>
+
         </form>
 
        
