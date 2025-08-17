@@ -1,87 +1,153 @@
-import { useNavigate } from 'react-router-dom'; 
-import ReactDOM from 'react-dom/client';
 import React, { useState } from "react";
-import {Link} from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import rouletteImg from "./images/Roulette.jpg";
+import minesImg from "./images/Mines.jpg";
+import plinkoImg from "./images/Plinko.jpg";
+import crashImg from "./images/Crash.png";
+import blackjackImg from "./images/Blackjack.jpg";
+import limboImg from "./images/Limbo.jpg";
+
+
 export default function App() {
   const [showGames, setShowGames] = useState(false);
+  const [collapsed, setCollapsed] = useState(false);
   const navigate=useNavigate();
-  function loginfun()
-  {
-    navigate("/Login");
+
+  function navWallet(){
+    navigate("/wallet");
+  }
+  function navAboutUs(){
+    navigate("/aboutus");}
+
+  function navLogin(){
+    navigate("/login");
+  } 
+  function navMyProfile(){
+    navigate("/myprofile");
   }
   const sidebarOptions = [
-    "My Profile",
-    "Wager",
-    "Referral",
+    {
+      name:"My Profile",
+      func:navMyProfile
+    },
+    {
+      name:"About Us",
+      func:navAboutUs,
+    },
   ];
 
   const games = [
     {
-      name: "DICE",
-      sub: "STAKE ORIGINALS",
+      name: "ROULETTE",
+      sub: "LUCKYSPIN ORIGINALS",
       players: 2299,
       bg: "from-purple-500 to-indigo-500",
-      img: "🎲",
+      img: rouletteImg
     },
     {
       name: "MINES",
-      sub: "STAKE ORIGINALS",
+      sub: "LUCKYSPIN ORIGINALS",
       players: 3035,
       bg: "from-green-500 to-cyan-500",
-      img: "💎",
-      link: "http://localhost:5173/",
+      img: minesImg,
+      link: ""
     },
     {
       name: "PLINKO",
-      sub: "STAKE ORIGINALS",
+      sub: "LUCKYSPIN ORIGINALS",
       players: 1804,
       bg: "from-pink-500 to-orange-400",
-      img: "⚪",
+      img: plinkoImg
     },
     {
       name: "CRASH",
-      sub: "STAKE ORIGINALS",
+      sub: "LUCKYSPIN ORIGINALS",
       players: 1146,
       bg: "from-blue-400 to-yellow-400",
-      img: "🚀",
+      img: crashImg,
       link: "http://127.0.0.1:8080",
     },
     {
+      name: "BLACKJACK",
+      sub: "LUCKYSPIN ORIGINALS",
+      players: 1804,
+      bg: "from-pink-500 to-orange-400",
+      img: blackjackImg,
+    },
+    {
       name: "LIMBO",
-      sub: "STAKE ORIGINALS",
+      sub: "LUCKYSPIN ORIGINALS",
       players: 1689,
       bg: "from-orange-400 to-red-400",
-      img: "🎯",
+      img: limboImg,
     },
   ];
 
+  const balance = 0.00;
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white flex font-sans">
-      {/* LEFT SIDEBAR updated */}
-      <aside className="w-60 bg-gradient-to-b from-gray-800 to-gray-900 p-4 border-r border-gray-700 hidden md:block">
-        <h2 className="text-xl font-bold mb-4 text-yellow-400">Menu</h2>
-        <ul className="space-y-2">
-          {sidebarOptions.map((option, index) => (
-            <li
-              key={index}
-              className="px-3 py-2 rounded hover:bg-gray-700 cursor-pointer"
-            >
-              {option}
-            </li>
-          ))}
-        </ul>
+      {/* COLLAPSIBLE SIDEBAR */}
+      <aside
+        className={`${
+          collapsed ? "w-14" : "w-60"
+        } bg-gradient-to-b from-gray-800 to-gray-900 p-4 border-r border-gray-700 hidden md:flex flex-col justify-between transition-all duration-300`}
+      >
+        <div>
+          {/* 3-dot button */}
+          <button
+            onClick={() => setCollapsed(!collapsed)}
+            className="mb-6 text-gray-400 text-4xl font-bold"
+          >
+            ≡
+          </button>
+
+          {!collapsed && (
+            <>
+              <h2 className="text-3xl font-extrabold mb-6 text-yellow-400 tracking-wide">
+                Menu
+              </h2>
+              <ul className="space-y-2">
+                {sidebarOptions.map((option,index) => (
+                  <li
+                    key={index}
+                    className="px-3 py-2 rounded hover:bg-gray-700 cursor-pointer"
+                  >
+                    <button onClick={option.func}>{option.name}</button>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+        </div>
+
+        {!collapsed && (
+          <div className="text-gray-500 text-xs text-center mt-8">
+            © 2025 LuckySpin
+          </div>
+        )}
       </aside>
 
       <div className="flex-1 flex flex-col">
-        {/* TOP NAV BAR (simplified, removed menu button) */}
+        {/* TOP NAV BAR */}
         <header className="flex items-center justify-between px-6 py-3 bg-gray-900 border-b border-gray-800">
           <h1 className="text-2xl font-extrabold tracking-wider text-yellow-400">
             🎰 LuckySpin
           </h1>
 
-          <div className="space-x-4">
-            <button className="px-4 py-2 bg-purple-600 rounded-full" onClick={loginfun}>Login</button>
+          {/* Balance + Wallet */}
+          <div className="flex items-center">
+            <div className="flex items-center bg-gray-800 px-6 py-3 rounded-l-lg text-lg font-semibold">
+              <span className="mr-1">₹ {balance.toLocaleString()}</span>
+              {/* <span className="text-gray-400">▼</span> */}
+            </div>
+            <button className="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-r-lg text-lg font-semibold border-2 border-blue-700" onClick={navWallet}>
+              Wallet
+            </button>
           </div>
+
+          <button className="px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-black shadow-lg transition rounded-full" onClick={navLogin}>Login</button>
+          
         </header>
 
         {/* MAIN CONTENT */}
@@ -97,25 +163,19 @@ export default function App() {
                 }}
               >
                 <h2 className="text-4xl font-bold mb-4 text-yellow-300 drop-shadow-lg">
-                  Weekly Cashback
+                  "Feeling Lucky Today"
                 </h2>
                 <p className="text-lg max-w-lg text-gray-200">
-                  Every Monday 10-15% up to €500!
+                 Welcome to LuckySpin - where every click is a chance, and every chance is a story.
                 </p>
-              </section>
 
-              {/* Play Now Section */}
-              <section className="py-12 text-center">
-                <h2 className="text-3xl mb-4 font-bold text-yellow-300">
-                  Feeling Lucky Today?
-                </h2>
                 <button
                   onClick={() => setShowGames(true)}
                   className="mt-4 px-6 py-3 bg-yellow-500 hover:bg-yellow-600 rounded-full font-semibold text-black shadow-lg transition"
                 >
                   Play Now
                 </button>
-              </section>
+              </section>
             </>
           ) : (
             <section className="p-8">
@@ -131,27 +191,52 @@ export default function App() {
                 </button>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-                {games.map((g, idx) => (
-                  <a key={idx} href={g.link || "#"}>
-                    <div
-                      className={`rounded-xl shadow-lg bg-gradient-to-br ${g.bg} p-6 flex flex-col items-center text-center hover:scale-105 transform transition`}
-                    >
-                      <div className="text-5xl mb-4">{g.img}</div>
-                      <h4 className="text-xl font-bold">{g.name}</h4>
-                      <p className="text-sm text-gray-200">{g.sub}</p>
-                    </div>
-                  </a>
-                ))}
-              </div>
+              <div className="grid grid-cols-3 gap-20">
+  {games.map((g, idx) => (
+    <a key={idx} href={g.link || "#"}>
+      <div
+        className={`rounded-xl shadow-lg bg-gradient-to-br ${g.bg} 
+                    p-4 flex flex-col text-center hover:scale-105 
+                    transform transition h-72`}
+      >
+        <div className="flex-1 flex items-center justify-center overflow-hidden rounded-lg mb-3">
+          <img 
+            src={g.img} 
+            alt={g.name} 
+            className="w-full h-full object-cover"
+          />
+        </div>
+        {/* <h4 className="text-lg font-bold">{g.name}</h4> */}
+        <p className="text-sm text-gray-200">{g.sub}</p>
+      </div>
+    </a>
+  ))}
+</div>
+
+
+                
             </section>
           )}
         </main>
 
-        {/* FOOTER */}
-        <footer className="text-center py-4 bg-gray-900 border-t border-gray-800 text-gray-500">
-          © {new Date().getFullYear()} LuckySpin — Gamble Responsibly
-        </footer>
+        {/* Footer only in home */}
+        {!showGames && (
+          <footer className="text-center py-12 bg-gray-900 border-t border-gray-800">
+            <div className="space-y-3 text-yellow-400 italic text-lg mb-6">
+              <p>
+                “The only way to win at gambling is to quit while you're ahead.”
+              </p>
+              <p>
+                “Luck always seems to be against the man who depends on it.” –
+                Anonymous
+              </p>
+              <p>“You can't beat the house, but you can enjoy the game.”</p>
+            </div>
+            {/* <div className="text-gray-500 text-sm">
+              © {new Date().getFullYear()} LuckySpin — Gamble Responsibly
+            </div> */}
+          </footer>
+        )}
       </div>
     </div>
   );
